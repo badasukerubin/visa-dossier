@@ -2,11 +2,12 @@
 declare(strict_types=1);
 
 use App\ApiCode;
+use App\ExceptionHandlers\ValidationExceptionHandler;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
 use MarcinOrlowski\ResponseBuilder\ExceptionHandlers\DefaultExceptionHandler;
 use MarcinOrlowski\ResponseBuilder\ExceptionHandlers\HttpExceptionHandler;
-use MarcinOrlowski\ResponseBuilder\ExceptionHandlers\ValidationExceptionHandler;
+// use MarcinOrlowski\ResponseBuilder\ExceptionHandlers\ValidationExceptionHandler;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
