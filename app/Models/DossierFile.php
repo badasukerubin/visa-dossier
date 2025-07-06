@@ -5,9 +5,14 @@ namespace App\Models;
 use App\Enums\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Database\Factories\DossierFileFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DossierFile extends Model
 {
+    /** @use HasFactory<DossierFileFactory>*/
+    use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *

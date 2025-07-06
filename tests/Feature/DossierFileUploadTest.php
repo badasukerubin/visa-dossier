@@ -11,24 +11,24 @@ beforeEach(function () {
 });
 
 beforeEach(function () {
-    $this->fileUploadRoute = route('dossier.file.upload');
+    $this->dossierFileUploadRoute = route('dossier.file.upload');
     $this->storage = Storage::disk('local');
 });
 
 it('requires a file', function () {
-    $response = postJson($this->fileUploadRoute, []);
+    $response = postJson($this->dossierFileUploadRoute, []);
 
     $response->assertUnprocessable();
 
     expect($response->json('code'))->toBe(ApiCode::VALIDATION_ERROR);
     expect($response->json('data.messages.dossier_file_upload'))->toBeArray();
 
-})->only();
+});
 
 it('requires a valid file type', function () {
     $file = UploadedFile::fake()->create('document.txt', 1000);
 
-    $response = postJson($this->fileUploadRoute, [
+    $response = postJson($this->dossierFileUploadRoute, [
         'dossier_file_upload' => $file,
     ]);
 
@@ -36,12 +36,12 @@ it('requires a valid file type', function () {
 
     expect($response->json('code'))->toBe(ApiCode::VALIDATION_ERROR);
     expect($response->json('data.messages.dossier_file_upload'))->toBeArray();
-})->only();
+});
 
 it('requires a file size less than 4MB', function () {
     $file = UploadedFile::fake()->image('large_image.jpg')->size(5000);
 
-    $response = postJson($this->fileUploadRoute, [
+    $response = postJson($this->dossierFileUploadRoute, [
         'dossier_file_upload' => $file,
     ]);
 
@@ -49,10 +49,10 @@ it('requires a file size less than 4MB', function () {
 
     expect($response->json('code'))->toBe(ApiCode::VALIDATION_ERROR);
     expect($response->json('data.messages.dossier_file_upload'))->toBeArray();
-})->only();
+});
 
 it('requires a valid category', function () {
-    $response = postJson($this->fileUploadRoute, [
+    $response = postJson($this->dossierFileUploadRoute, [
         'category' => 'invalid_category',
     ]);
 
@@ -60,12 +60,12 @@ it('requires a valid category', function () {
 
     expect($response->json('code'))->toBe(ApiCode::VALIDATION_ERROR);
     expect($response->json('data.messages.category'))->toBeArray();
-})->only();
+});
 
 it('uploads a valid file', function () {
     $file = UploadedFile::fake()->image('passport.jpg')->size(1000);
 
-    $response = postJson($this->fileUploadRoute, [
+    $response = postJson($this->dossierFileUploadRoute, [
         'dossier_name' => 'Essential Documents',
         'dossier_file_upload' => $file,
         'category' => Category::Passport->value,
@@ -90,4 +90,4 @@ it('uploads a valid file', function () {
     ]);
 
     $this->storage->assertExists("dossiers/{$file->hashName()}");
-})->only();
+});
