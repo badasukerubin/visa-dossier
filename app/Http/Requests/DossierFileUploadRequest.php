@@ -20,6 +20,8 @@ class DossierFileUploadRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        // todo: architecture test, remove all ds() calls
+        ds(10);
         return true;
     }
 
