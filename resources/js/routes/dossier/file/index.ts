@@ -1,7 +1,7 @@
 import { queryParams, type QueryParams } from './../../../wayfinder'
 /**
-* @see \App\Http\Controllers\DossierFileUploadController::upload
-* @see app/Http/Controllers/DossierFileUploadController.php:20
+* @see \App\Http\Controllers\API\V1\DossierFileUploadController::upload
+* @see app/Http/Controllers/API/V1/DossierFileUploadController.php:21
 * @route '/api/v1/dossier/file-upload'
 */
 export const upload = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -18,8 +18,8 @@ upload.definition = {
 }
 
 /**
-* @see \App\Http\Controllers\DossierFileUploadController::upload
-* @see app/Http/Controllers/DossierFileUploadController.php:20
+* @see \App\Http\Controllers\API\V1\DossierFileUploadController::upload
+* @see app/Http/Controllers/API/V1/DossierFileUploadController.php:21
 * @route '/api/v1/dossier/file-upload'
 */
 upload.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -27,8 +27,8 @@ upload.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
 }
 
 /**
-* @see \App\Http\Controllers\DossierFileUploadController::upload
-* @see app/Http/Controllers/DossierFileUploadController.php:20
+* @see \App\Http\Controllers\API\V1\DossierFileUploadController::upload
+* @see app/Http/Controllers/API/V1/DossierFileUploadController.php:21
 * @route '/api/v1/dossier/file-upload'
 */
 upload.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -40,8 +40,8 @@ upload.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
 })
 
 /**
-* @see \App\Http\Controllers\DossierFileDeleteController::deleteMethod
-* @see app/Http/Controllers/DossierFileDeleteController.php:19
+* @see \App\Http\Controllers\API\V1\DossierFileDeleteController::deleteMethod
+* @see app/Http/Controllers/API/V1/DossierFileDeleteController.php:20
 * @route '/api/v1/dossier/file-delete/{dossier_file}'
 */
 export const deleteMethod = (args: { dossier_file: string | number } | [dossier_file: string | number ] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -58,8 +58,8 @@ deleteMethod.definition = {
 }
 
 /**
-* @see \App\Http\Controllers\DossierFileDeleteController::deleteMethod
-* @see app/Http/Controllers/DossierFileDeleteController.php:19
+* @see \App\Http\Controllers\API\V1\DossierFileDeleteController::deleteMethod
+* @see app/Http/Controllers/API/V1/DossierFileDeleteController.php:20
 * @route '/api/v1/dossier/file-delete/{dossier_file}'
 */
 deleteMethod.url = (args: { dossier_file: string | number } | [dossier_file: string | number ] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -83,8 +83,8 @@ deleteMethod.url = (args: { dossier_file: string | number } | [dossier_file: str
 }
 
 /**
-* @see \App\Http\Controllers\DossierFileDeleteController::deleteMethod
-* @see app/Http/Controllers/DossierFileDeleteController.php:19
+* @see \App\Http\Controllers\API\V1\DossierFileDeleteController::deleteMethod
+* @see app/Http/Controllers/API/V1/DossierFileDeleteController.php:20
 * @route '/api/v1/dossier/file-delete/{dossier_file}'
 */
 deleteMethod.delete = (args: { dossier_file: string | number } | [dossier_file: string | number ] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

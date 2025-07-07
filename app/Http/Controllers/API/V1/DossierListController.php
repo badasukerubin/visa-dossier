@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API\V1;
 
 use App\ApiCode;
 use App\Enums\Category;
+use App\Http\Controllers\Controller;
 use App\Models\Dossier;
 use Exception;
 use Illuminate\Support\Facades\DB;

@@ -1,11 +1,7 @@
-import DossierFileUploadController from './DossierFileUploadController'
-import DossierFileDeleteController from './DossierFileDeleteController'
-import DossierListController from './DossierListController'
+import API from './API'
 
 const Controllers = {
-    DossierFileUploadController,
-    DossierFileDeleteController,
-    DossierListController,
+    API,
 }
 
 export default Controllers

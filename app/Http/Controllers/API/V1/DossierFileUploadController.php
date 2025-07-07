@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API\V1;
 
 use App\ApiCode;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\DossierFileUploadRequest;
 use App\Models\Dossier;
 use Exception;

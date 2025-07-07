@@ -1,7 +1,7 @@
-import { queryParams, type QueryParams } from './../../../../wayfinder'
+import { queryParams, type QueryParams } from './../../../../../../wayfinder'
 /**
-* @see \App\Http\Controllers\DossierFileUploadController::__invoke
-* @see app/Http/Controllers/DossierFileUploadController.php:20
+* @see \App\Http\Controllers\API\V1\DossierFileUploadController::__invoke
+* @see app/Http/Controllers/API/V1/DossierFileUploadController.php:21
 * @route '/api/v1/dossier/file-upload'
 */
 const DossierFileUploadController = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -18,8 +18,8 @@ DossierFileUploadController.definition = {
 }
 
 /**
-* @see \App\Http\Controllers\DossierFileUploadController::__invoke
-* @see app/Http/Controllers/DossierFileUploadController.php:20
+* @see \App\Http\Controllers\API\V1\DossierFileUploadController::__invoke
+* @see app/Http/Controllers/API/V1/DossierFileUploadController.php:21
 * @route '/api/v1/dossier/file-upload'
 */
 DossierFileUploadController.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -27,8 +27,8 @@ DossierFileUploadController.url = (options?: { query?: QueryParams, mergeQuery?:
 }
 
 /**
-* @see \App\Http\Controllers\DossierFileUploadController::__invoke
-* @see app/Http/Controllers/DossierFileUploadController.php:20
+* @see \App\Http\Controllers\API\V1\DossierFileUploadController::__invoke
+* @see app/Http/Controllers/API/V1/DossierFileUploadController.php:21
 * @route '/api/v1/dossier/file-upload'
 */
 DossierFileUploadController.post = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

@@ -1,7 +1,7 @@
-import { queryParams, type QueryParams } from './../../../../wayfinder'
+import { queryParams, type QueryParams } from './../../../../../../wayfinder'
 /**
-* @see \App\Http\Controllers\DossierFileDeleteController::__invoke
-* @see app/Http/Controllers/DossierFileDeleteController.php:19
+* @see \App\Http\Controllers\API\V1\DossierFileDeleteController::__invoke
+* @see app/Http/Controllers/API/V1/DossierFileDeleteController.php:20
 * @route '/api/v1/dossier/file-delete/{dossier_file}'
 */
 const DossierFileDeleteController = (args: { dossier_file: string | number } | [dossier_file: string | number ] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -18,8 +18,8 @@ DossierFileDeleteController.definition = {
 }
 
 /**
-* @see \App\Http\Controllers\DossierFileDeleteController::__invoke
-* @see app/Http/Controllers/DossierFileDeleteController.php:19
+* @see \App\Http\Controllers\API\V1\DossierFileDeleteController::__invoke
+* @see app/Http/Controllers/API/V1/DossierFileDeleteController.php:20
 * @route '/api/v1/dossier/file-delete/{dossier_file}'
 */
 DossierFileDeleteController.url = (args: { dossier_file: string | number } | [dossier_file: string | number ] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -43,8 +43,8 @@ DossierFileDeleteController.url = (args: { dossier_file: string | number } | [do
 }
 
 /**
-* @see \App\Http\Controllers\DossierFileDeleteController::__invoke
-* @see app/Http/Controllers/DossierFileDeleteController.php:19
+* @see \App\Http\Controllers\API\V1\DossierFileDeleteController::__invoke
+* @see app/Http/Controllers/API/V1/DossierFileDeleteController.php:20
 * @route '/api/v1/dossier/file-delete/{dossier_file}'
 */
 DossierFileDeleteController.delete = (args: { dossier_file: string | number } | [dossier_file: string | number ] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
