@@ -29,8 +29,10 @@ class DossierFileUploadController extends Controller
 
             $dossierFileUpload = $request->dossier_file_upload;
 
+            $user = auth()->user();
+
             $dossierFilePath = $this->storage->putFileAs(
-                'dossiers',
+                'dossiers/'.$user->id,
                 $dossierFileUpload,
                 $dossierFileUpload->hashName()
             );

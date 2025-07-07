@@ -1,6 +1,6 @@
 import { queryParams, type QueryParams } from './../../wayfinder'
 /**
-* @see vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemServiceProvider.php:98
+* @see [serialized-closure]:2
 * @route '/storage/{path}'
 */
 export const local = (args: { path: string | number } | [path: string | number ] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -17,7 +17,7 @@ local.definition = {
 }
 
 /**
-* @see vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemServiceProvider.php:98
+* @see [serialized-closure]:2
 * @route '/storage/{path}'
 */
 local.url = (args: { path: string | number } | [path: string | number ] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -41,7 +41,7 @@ local.url = (args: { path: string | number } | [path: string | number ] | string
 }
 
 /**
-* @see vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemServiceProvider.php:98
+* @see [serialized-closure]:2
 * @route '/storage/{path}'
 */
 local.get = (args: { path: string | number } | [path: string | number ] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -53,7 +53,7 @@ local.get = (args: { path: string | number } | [path: string | number ] | string
 })
 
 /**
-* @see vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemServiceProvider.php:98
+* @see [serialized-closure]:2
 * @route '/storage/{path}'
 */
 local.head = (args: { path: string | number } | [path: string | number ] | string | number, options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

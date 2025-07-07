@@ -1,11 +1,9 @@
 <?php
 
-use App\ApiCode;
-use App\Enums\Category;
 use App\Models\Dossier;
-use Illuminate\Http\UploadedFile;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
-use function Pest\Laravel\{postJson, assertDatabaseHas, assertDatabaseMissing, deleteJson};
+use function Pest\Laravel\{actingAs, assertDatabaseMissing};
 
 beforeEach(function () {
     Storage::fake('local');
@@ -14,6 +12,7 @@ beforeEach(function () {
 beforeEach(function () {
     $this->dossierFileDeleteUrl = 'dossier.file.delete';
     $this->storage = Storage::disk('local');
+    $this->user = User::factory()->create();
 });
 
 it('deletes a dossier file', function () {
@@ -21,7 +20,7 @@ it('deletes a dossier file', function () {
 
     $dossierFileDeleteRoute = route($this->dossierFileDeleteUrl, $dossier->files[0]->id);
 
-    $response = deleteJson($dossierFileDeleteRoute);
+    $response = actingAs($this->user)->deleteJson($dossierFileDeleteRoute);
 
     $response->assertSuccessful();
 

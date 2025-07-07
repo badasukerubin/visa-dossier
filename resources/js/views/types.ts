@@ -1,3 +1,4 @@
+export type MessageType = "success" | "error" | "warning" | "info";
 export interface Model {
     id: number;
     created_at: string;
