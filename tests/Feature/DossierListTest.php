@@ -18,7 +18,7 @@ it('returns an empty list when no dossiers exist', function () {
 
     $response->assertSuccessful();
     expect($response->json('data.items'))->toBeArray()->toBeEmpty();
-})->only();
+});
 
 it('returns dossiers with files', function () {
     $dossier = Dossier::factory()->withName('Essential Documents')->withDossierFile()->create();
@@ -34,7 +34,7 @@ it('returns dossiers with files', function () {
     expect($items[0]['files'][0]['file_name'])->toBe($dossier->files[0]->file_name);
     expect($items[0]['files'][0]['file_path'])->toBe($dossier->files[0]->file_path);
     expect($items[0]['files'][0]['category'])->toBe($dossier->files[0]->category->value);
-})->only();
+});
 
 it('returns multiple dossiers with files', function () {
     $dossier1 = Dossier::factory()->withName('Travel Documents')->withDossierFile()->create();
@@ -51,4 +51,4 @@ it('returns multiple dossiers with files', function () {
     expect($items[0]['files'][0]['file_name'])->toBe($dossier1->files[0]->file_name);
     expect($items[1]['name'])->toBe('Financial Documents');
     expect($items[1]['files'][0]['file_name'])->toBe($dossier2->files[0]->file_name);
-})->only();
+});

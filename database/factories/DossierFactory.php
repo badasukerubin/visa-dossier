@@ -30,9 +30,15 @@ class DossierFactory extends Factory
         ]);
     }
 
-    public function withDossierFile(?DossierFile $dossierFile = null): static
+    public function withDossierFile(?DossierFile $dossierFile = null, ?bool $withFile = false): static
     {
-        $dossierFile ??= DossierFile::factory()->create();
+        $dossierFileFactory ??= DossierFile::factory();
+
+        if ($withFile) {
+            $dossierFileFactory = $dossierFileFactory->withFile();
+        }
+
+        $dossierFile = $dossierFileFactory->create();
 
         return $this->afterCreating(function (Dossier $dossier) use ($dossierFile) {
             $dossier->files()->attach($dossierFile);
