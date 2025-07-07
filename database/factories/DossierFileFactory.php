@@ -25,7 +25,7 @@ class DossierFileFactory extends Factory
             'file_name' => Str::random(40) . '.pdf',
             'file_type' => 'application/pdf',
             'file_path' => $this->faker->url,
-            'category' => Category::General,
+            'category' => Category::Passport,
         ];
     }
 

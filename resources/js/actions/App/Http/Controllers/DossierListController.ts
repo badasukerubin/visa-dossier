@@ -1,7 +1,7 @@
 import { queryParams, type QueryParams } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\DossierListController::__invoke
-* @see app/Http/Controllers/DossierListController.php:14
+* @see app/Http/Controllers/DossierListController.php:16
 * @route '/api/v1/dossier/list'
 */
 const DossierListController = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -19,7 +19,7 @@ DossierListController.definition = {
 
 /**
 * @see \App\Http\Controllers\DossierListController::__invoke
-* @see app/Http/Controllers/DossierListController.php:14
+* @see app/Http/Controllers/DossierListController.php:16
 * @route '/api/v1/dossier/list'
 */
 DossierListController.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -28,7 +28,7 @@ DossierListController.url = (options?: { query?: QueryParams, mergeQuery?: Query
 
 /**
 * @see \App\Http\Controllers\DossierListController::__invoke
-* @see app/Http/Controllers/DossierListController.php:14
+* @see app/Http/Controllers/DossierListController.php:16
 * @route '/api/v1/dossier/list'
 */
 DossierListController.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -41,7 +41,7 @@ DossierListController.get = (options?: { query?: QueryParams, mergeQuery?: Query
 
 /**
 * @see \App\Http\Controllers\DossierListController::__invoke
-* @see app/Http/Controllers/DossierListController.php:14
+* @see app/Http/Controllers/DossierListController.php:16
 * @route '/api/v1/dossier/list'
 */
 DossierListController.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {

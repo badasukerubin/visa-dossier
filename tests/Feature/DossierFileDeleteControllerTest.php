@@ -30,4 +30,4 @@ it('deletes a dossier file', function () {
     ]);
 
     $this->storage->assertMissing('dossiers/' . $dossier->files[0]->file_name);
-})->only();
+});

@@ -29,11 +29,15 @@ it('returns dossiers with files', function () {
 
     $items = $response->json('data.items');
 
-    expect($items)->toHaveCount(1);
     expect($items[0]['name'])->toBe('Essential Documents');
-    expect($items[0]['files'][0]['file_name'])->toBe($dossier->files[0]->file_name);
-    expect($items[0]['files'][0]['file_path'])->toBe($dossier->files[0]->file_path);
-    expect($items[0]['files'][0]['category'])->toBe($dossier->files[0]->category->value);
+
+    $filesGrouped = $items[0]['files'];
+    $category = $dossier->files[0]->category->value;
+
+    expect($filesGrouped)->toHaveKey($category);
+    expect($filesGrouped[$category][0]['file_name'])->toBe($dossier->files[0]->file_name);
+    expect($filesGrouped[$category][0]['file_path'])->toBe($dossier->files[0]->file_path);
+    expect($filesGrouped[$category][0]['category'])->toBe($dossier->files[0]->category->value);
 });
 
 it('returns multiple dossiers with files', function () {
@@ -46,9 +50,16 @@ it('returns multiple dossiers with files', function () {
 
     $items = $response->json('data.items');
 
-    expect($items)->toHaveCount(2);
-    expect($items[0]['name'])->toBe('Travel Documents');
-    expect($items[0]['files'][0]['file_name'])->toBe($dossier1->files[0]->file_name);
-    expect($items[1]['name'])->toBe('Financial Documents');
-    expect($items[1]['files'][0]['file_name'])->toBe($dossier2->files[0]->file_name);
+    $dossier1Item = collect($items)->first(fn($item) => $item['name'] === 'Travel Documents');
+    $dossier2Item = collect($items)->first(fn($item) => $item['name'] === 'Financial Documents');
+
+    $category1 = $dossier1->files[0]->category->value;
+    $filesGrouped1 = $dossier1Item['files'];
+    expect($filesGrouped1)->toHaveKey($category1);
+    expect(collect($filesGrouped1[$category1])->pluck('file_name'))->toContain($dossier1->files[0]->file_name);
+
+    $category2 = $dossier2->files[0]->category->value;
+    $filesGrouped2 = $dossier2Item['files'];
+    expect($filesGrouped2)->toHaveKey($category2);
+    expect(collect($filesGrouped2[$category2])->pluck('file_name'))->toContain($dossier2->files[0]->file_name);
 });
