@@ -13,3 +13,6 @@ window._ = _;
 
 (window as any).axios.defaults.headers.common["X-Requested-With"] =
     "XMLHttpRequest";
+
+(window as any).axios.defaults.withCredentials = true;
+(window as any).axios.defaults.baseURL = "http://visa-dossier.test";

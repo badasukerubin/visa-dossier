@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "@tanstack/react-form";
 import Field from "@/components/Form/Validation/Field";
-import DossierFileUploadController from "@/actions/App/Http/Controllers/DossierFileUploadController";
+import DossierFileUploadController from "@/actions/App/Http/Controllers/API/V1/DossierFileUploadController";
 import axios from "axios";
 import { Category, Inputs } from "@/views/types";
 
