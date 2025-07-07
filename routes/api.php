@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DossierFileDeleteController;
 use App\Http\Controllers\DossierFileUploadController;
 use App\Http\Controllers\DossierListController;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,7 @@ Route::group(['prefix' => 'v1'], function () {
 
     Route::group(['prefix' => 'dossier'], function () {
         Route::post('file-upload', DossierFileUploadController::class)->name('dossier.file.upload');
+        Route::delete('file-delete/{dossier_file}', DossierFileDeleteController::class)->name('dossier.file.delete');
         Route::get('list', DossierListController::class)->name('dossier.list');
     });
 });
