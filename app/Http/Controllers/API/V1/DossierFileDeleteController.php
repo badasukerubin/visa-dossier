@@ -34,8 +34,6 @@ class DossierFileDeleteController extends Controller
         } catch (Exception $e) {
             DB::rollBack();
 
-            ds($e);
-
             Log::error('Error deleting dossier file: ' . $e->getMessage());
 
             return RB::error(ApiCode::DATABASE_ERROR);

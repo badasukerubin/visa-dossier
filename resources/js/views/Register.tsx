@@ -27,9 +27,19 @@ const Register = () => {
                 navigate("/login", {
                     state: {
                         message: "Registration successful! Please log in.",
+                        type: "success",
                     },
                 });
             } catch (error: any) {
+                navigate("/register", {
+                    state: {
+                        message:
+                            error.response?.data?.message ||
+                            "Registration failed.",
+                        type: "error",
+                    },
+                });
+
                 console.error("Registration failed:", error);
             }
         },

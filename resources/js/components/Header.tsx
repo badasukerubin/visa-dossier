@@ -13,7 +13,7 @@ const Header = () => {
             setAuthenticated(false);
             refresh();
             navigate("/login", {
-                state: { message: "Logged out successfully." },
+                state: { message: "Logged out successfully.", type: "success" },
             });
         } catch (error) {}
     };
@@ -29,7 +29,7 @@ const Header = () => {
                     {authenticated ? (
                         <button
                             onClick={handleLogout}
-                            className="text-gray-700 hover:text-blue-600 font-medium"
+                            className="text-gray-700 hover:text-blue-600 font-medium cursor-pointer"
                         >
                             Log Out
                         </button>

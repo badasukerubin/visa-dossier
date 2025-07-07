@@ -1,9 +1,10 @@
 <?php
 
 use App\Models\Dossier;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
-use function Pest\Laravel\getJson;
+use function Pest\Laravel\actingAs;
 
 beforeEach(function () {
     Storage::fake('local');
@@ -11,10 +12,11 @@ beforeEach(function () {
 
 beforeEach(function () {
     $this->dossierListRoute = route('dossier.list');
+    $this->user = User::factory()->create();
 });
 
 it('returns an empty list when no dossiers exist', function () {
-    $response = getJson($this->dossierListRoute);
+    $response = actingAs($this->user)->getJson($this->dossierListRoute);
 
     $response->assertSuccessful();
     expect($response->json('data.items'))->toBeArray()->toBeEmpty();
@@ -23,7 +25,7 @@ it('returns an empty list when no dossiers exist', function () {
 it('returns dossiers with files', function () {
     $dossier = Dossier::factory()->withName('Essential Documents')->withDossierFile()->create();
 
-    $response = getJson($this->dossierListRoute);
+    $response = actingAs($this->user)->getJson($this->dossierListRoute);
 
     $response->assertSuccessful();
 
@@ -44,7 +46,7 @@ it('returns multiple dossiers with files', function () {
     $dossier1 = Dossier::factory()->withName('Travel Documents')->withDossierFile()->create();
     $dossier2 = Dossier::factory()->withName('Financial Documents')->withDossierFile()->create();
 
-    $response = getJson($this->dossierListRoute);
+    $response = actingAs($this->user)->getJson($this->dossierListRoute);
 
     $response->assertSuccessful();
 

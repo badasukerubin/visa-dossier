@@ -38,7 +38,6 @@ class DossierListController extends Controller
             });
 
         } catch (Exception $e) {
-            // ds($e);
             Log::error('Error fetching dossier: ' . $e->getMessage());
 
             return RB::error(ApiCode::DATABASE_ERROR);

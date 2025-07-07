@@ -1,6 +1,6 @@
 import { queryParams, type QueryParams } from './../../wayfinder'
 /**
-* @see routes/api.php:16
+* @see [serialized-closure]:2
 * @route '/api/v1/user/get'
 */
 export const get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -17,7 +17,7 @@ get.definition = {
 }
 
 /**
-* @see routes/api.php:16
+* @see [serialized-closure]:2
 * @route '/api/v1/user/get'
 */
 get.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
@@ -25,7 +25,7 @@ get.url = (options?: { query?: QueryParams, mergeQuery?: QueryParams }) => {
 }
 
 /**
-* @see routes/api.php:16
+* @see [serialized-closure]:2
 * @route '/api/v1/user/get'
 */
 get.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
@@ -37,7 +37,7 @@ get.get = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
 })
 
 /**
-* @see routes/api.php:16
+* @see [serialized-closure]:2
 * @route '/api/v1/user/get'
 */
 get.head = (options?: { query?: QueryParams, mergeQuery?: QueryParams }): {
