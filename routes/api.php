@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\DossierFileDeleteController;
-use App\Http\Controllers\DossierFileUploadController;
-use App\Http\Controllers\DossierListController;
+use App\Http\Controllers\API\V1\DossierFileDeleteController;
+use App\Http\Controllers\API\V1\DossierFileUploadController;
+use App\Http\Controllers\API\V1\DossierListController;
 use Illuminate\Support\Facades\Route;
 use MarcinOrlowski\ResponseBuilder\ResponseBuilder as RB;
 

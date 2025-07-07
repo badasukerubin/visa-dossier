@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import DossierListController from "@/actions/App/Http/Controllers/DossierListController";
+import DossierListController from "@/actions/App/Http/Controllers/API/V1/DossierListController";
 import ListDossiers from "@/components/ListDossiers";
 import { DossierGroupedByCategory } from "./types";
 
