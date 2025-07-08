@@ -9,34 +9,36 @@ import React, {
 import axios from "axios";
 import { get } from "@/routes/user";
 import { AuthContextType } from "./types";
+import useSimpleQuery from "@/hooks/Query/useSimpleQuery";
 
 const AuthContext = createContext<AuthContextType>({
     authenticated: false,
     loading: true,
-    refresh: () => {},
     setAuthenticated: () => {},
 });
 
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [authenticated, setAuthenticated] = useState(false);
-    const [loading, setLoading] = useState(true);
 
-    const refresh = () => {
-        setLoading(true);
-        axios
-            .get(get().url)
-            .then(() => setAuthenticated(true))
-            .catch(() => setAuthenticated(false))
-            .finally(() => setLoading(false));
-    };
+    const { data, isPending: loading } = useSimpleQuery({
+        queryKey: ["auth-user"],
+        route: get().url,
+        enabled: true,
+        staleTime: 0,
+        retry: false,
+    });
 
     useEffect(() => {
-        refresh();
-    }, []);
+        setAuthenticated(!!data);
+    }, [data, loading]);
 
     return (
         <AuthContext.Provider
-            value={{ authenticated, loading, refresh, setAuthenticated }}
+            value={{
+                authenticated,
+                loading,
+                setAuthenticated,
+            }}
         >
             {children}
         </AuthContext.Provider>

@@ -1,17 +1,24 @@
 import { useAuth } from "@/Provider/AuthProvider";
+import { logout } from "@/routes";
+import { useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
 import { NavLink, useNavigate } from "react-router";
 
 const Header = () => {
-    const { authenticated, setAuthenticated, refresh } = useAuth();
+    const { authenticated, setAuthenticated } = useAuth();
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
 
     const handleLogout = async () => {
         try {
-            await axios.post("/logout");
+            await axios.post(logout.url());
             setAuthenticated(false);
-            refresh();
+
+            queryClient.invalidateQueries({
+                queryKey: ["auth-user"],
+            });
+
             navigate("/login", {
                 state: { message: "Logged out successfully.", type: "success" },
             });

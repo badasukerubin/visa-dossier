@@ -5,10 +5,15 @@ import { useNavigate, useLocation } from "react-router";
 import { store } from "@/actions/Laravel/Fortify/Http/Controllers/AuthenticatedSessionController";
 import { show } from "@/actions/Laravel/Sanctum/Http/Controllers/CsrfCookieController";
 import Message from "@/components/Message";
+import { useQueryClient } from "@tanstack/react-query";
+import { useAuth } from "@/Provider/AuthProvider";
 
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const queryClient = useQueryClient();
+    const { setAuthenticated } = useAuth();
+
     const { message, type } = location.state || { message: null, type: null };
 
     const form = useForm({
@@ -20,10 +25,19 @@ const Login = () => {
             try {
                 await axios.get(show().url);
                 await axios.post(store().url, value, {
-                    headers: { "Content-Type": "application/json" },
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                 });
 
                 form.reset();
+
+                setAuthenticated(true);
+
+                queryClient.invalidateQueries({
+                    queryKey: ["auth-user"],
+                });
+
                 navigate("/", {
                     state: { message: "Login successful!", type: "success" },
                 });

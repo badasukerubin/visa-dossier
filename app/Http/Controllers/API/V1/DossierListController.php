@@ -24,17 +24,19 @@ class DossierListController extends Controller
             $dossiers = Dossier::with('files')->latest()->get();
 
             $dossiers->each(function ($dossier) use ($allowedCategories) {
-                $dossier->setRelation(
-                    'files',
-                    $dossier->files
-                        ->groupBy('category')
-                        ->filter(function ($files, $category) use ($allowedCategories) {
-                            return in_array($category, $allowedCategories);
-                        })
-                        ->map(function ($files) {
-                            return $files->values();
-                        })
-                );
+                $grouped = $dossier->files
+                    ->groupBy('category')
+                    ->filter(function ($files, $category) use ($allowedCategories) {
+                        return in_array($category, $allowedCategories);
+                    })
+                    ->map(function ($files) {
+                        return $files->values();
+                    });
+
+                $allCategories = collect($allowedCategories)
+                    ->mapWithKeys(fn($cat) => [$cat => collect()]);
+
+                $dossier->setRelation('files', $allCategories->merge($grouped));
             });
 
         } catch (Exception $e) {
