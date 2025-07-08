@@ -82,14 +82,18 @@ git clone https://github.com/badasukerubin/visa-dossier
 
 -   [x] Upload a file
 -   [x] List uploaded files, grouped by type
--   [ ] Delete a file
+-   [x] Delete a file
 -   [x] Files should be saved using Laravel’s filesystem (local disk is fine).
--   [x] Data must be persisted in a database. - [x] Apply proper file validation: - [x] Allowed types: PDF, PNG, JPG - [x] Max size: 4MB - [x] Follow good API and error handling practices.
+-   [x] Data must be persisted in a database.
+-   [x] Apply proper file validation:
+-   [x] Allowed types: PDF, PNG, JPG
+-   [x] Max size: 4MB
+-   [x] Follow good API and error handling practices.
 
 ### Remix (Frontend)
 
 -   [x] Build a minimal UI that allows a user to:
 -   [x] Select and upload a file (no drag and drop)
 -   [x] View a list of uploaded files, grouped by 3 categories of your choosing
--   [ ] Delete a file
+-   [x] Delete a file
 -   [ ] Show a basic file preview if possible (e.g. image thumbnail or file na

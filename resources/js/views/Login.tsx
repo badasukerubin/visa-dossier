@@ -5,10 +5,13 @@ import { useNavigate, useLocation } from "react-router";
 import { store } from "@/actions/Laravel/Fortify/Http/Controllers/AuthenticatedSessionController";
 import { show } from "@/actions/Laravel/Sanctum/Http/Controllers/CsrfCookieController";
 import Message from "@/components/Message";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const queryClient = useQueryClient();
+
     const { message, type } = location.state || { message: null, type: null };
 
     const form = useForm({
@@ -26,6 +29,11 @@ const Login = () => {
                 });
 
                 form.reset();
+
+                queryClient.invalidateQueries({
+                    queryKey: ["auth-user"],
+                });
+
                 navigate("/", {
                     state: { message: "Login successful!", type: "success" },
                 });

@@ -15,10 +15,10 @@ const queryClient = new QueryClient();
 
 root.render(
     <BrowserRouter>
-        <AuthProvider>
-            <QueryClientProvider client={queryClient}>
+        <QueryClientProvider client={queryClient}>
+            <AuthProvider>
                 <App />
-            </QueryClientProvider>
-        </AuthProvider>
+            </AuthProvider>
+        </QueryClientProvider>
     </BrowserRouter>,
 );
