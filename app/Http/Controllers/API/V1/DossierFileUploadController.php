@@ -23,9 +23,9 @@ class DossierFileUploadController extends Controller
         try {
             DB::beginTransaction();
 
-            $dossier = Dossier::create([
-                'name' => $request->dossier_name,
-            ]);
+            $dossier = Dossier::updateOrCreate(
+                ['name' => $request->dossier_name],
+            );
 
             $dossierFileUpload = $request->dossier_file_upload;
 

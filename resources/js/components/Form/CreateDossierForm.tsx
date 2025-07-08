@@ -4,8 +4,13 @@ import Field from "@/components/Form/Validation/Field";
 import DossierFileUploadController from "@/actions/App/Http/Controllers/API/V1/DossierFileUploadController";
 import axios from "axios";
 import { Category, Inputs } from "@/views/types";
+import { useNavigate } from "react-router";
+import { useQueryClient } from "@tanstack/react-query";
 
 const CreateDossierForm = () => {
+    const navigate = useNavigate();
+    const queryClient = useQueryClient();
+
     const defaultValues: Inputs = {
         dossier_name: "",
         dossier_file_upload: null,
@@ -15,8 +20,6 @@ const CreateDossierForm = () => {
     const form = useForm({
         defaultValues,
         onSubmit: async ({ value }) => {
-            console.log(value);
-
             try {
                 await axios.post(
                     DossierFileUploadController.post().url,
@@ -26,8 +29,27 @@ const CreateDossierForm = () => {
                     },
                 );
 
+                queryClient.invalidateQueries({
+                    queryKey: ["dossiers"],
+                });
+
                 form.reset();
+                navigate("/", {
+                    state: {
+                        message: "Dossier uploaded successfully!",
+                        type: "success",
+                    },
+                });
             } catch (error: any) {
+                navigate("/create-dossier", {
+                    state: {
+                        message:
+                            error.response?.data?.message ||
+                            "Dossier upload failed.",
+                        type: "error",
+                    },
+                });
+
                 console.error("Upload failed:", error);
             }
         },

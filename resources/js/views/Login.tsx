@@ -20,7 +20,9 @@ const Login = () => {
             try {
                 await axios.get(show().url);
                 await axios.post(store().url, value, {
-                    headers: { "Content-Type": "application/json" },
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                 });
 
                 form.reset();

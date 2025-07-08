@@ -1,10 +1,87 @@
 import React from "react";
 import { ListDossiersProps } from "./types";
 import { formatCategory } from "@/helper";
+import { NavLink, useNavigate } from "react-router";
+import { Category } from "@/views/types";
+import axios from "axios";
+import DossierFileUploadController from "@/actions/App/Http/Controllers/API/V1/DossierFileUploadController";
+import DossierFileDeleteController from "@/actions/App/Http/Controllers/API/V1/DossierFileDeleteController";
+import { useQueryClient } from "@tanstack/react-query";
 
 const ListDossiers = ({ dossiers }: ListDossiersProps) => {
+    const navigate = useNavigate();
+    const queryClient = useQueryClient();
+
+    const handleUpload = async (
+        file: File,
+        dossierName: string,
+        category: Category,
+    ) => {
+        const formData = new FormData();
+        formData.append("dossier_name", dossierName);
+        formData.append("dossier_file_upload", file);
+        formData.append("category", category);
+
+        try {
+            await axios.post(DossierFileUploadController.post().url, formData, {
+                headers: { "Content-Type": "multipart/form-data" },
+            });
+
+            navigate("/", {
+                state: {
+                    message: "File uploaded successfully!",
+                    type: "success",
+                },
+            });
+
+            queryClient.invalidateQueries({
+                queryKey: ["dossiers"],
+            });
+        } catch (error: any) {
+            navigate("/", {
+                state: {
+                    message:
+                        error.response?.data?.message || "File upload failed.",
+                    type: "error",
+                },
+            });
+
+            console.error("Upload failed:", error);
+        }
+    };
+
+    const handleDelete = async (fileId: number) => {
+        try {
+            await axios.delete(DossierFileDeleteController.delete(fileId).url);
+
+            queryClient.invalidateQueries({
+                queryKey: ["dossiers"],
+            });
+
+            navigate("/", {
+                state: {
+                    message: "File deleted successfully!",
+                    type: "success",
+                },
+            });
+        } catch (error: any) {
+            console.error("Delete failed:", error);
+        }
+    };
+
     return (
         <div className="space-y-8">
+            <div className="flex justify-end">
+                <span className="text-blue-600">
+                    <NavLink
+                        to="/create-dossier"
+                        className="underline hover:text-blue-700"
+                    >
+                        Create a new dossier
+                    </NavLink>
+                </span>
+            </div>
+
             {dossiers.map((dossier) => (
                 <div key={dossier.id}>
                     <p className="font-bold mb-3">{dossier.name}</p>
@@ -38,22 +115,13 @@ const ListDossiers = ({ dossiers }: ListDossiersProps) => {
                                                             {file.file_name}
                                                         </div>
 
-                                                        <a
-                                                            href={`/storage/${file.file_path}`}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="text-blue-600 text-sm hover:underline"
-                                                        >
-                                                            Download
-                                                        </a>
-
                                                         <button
-                                                            className="text-red-600 text-sm ml-2 hover:underline cursor-pointer"
-                                                            onClick={() => {
-                                                                console.log(
-                                                                    `Delete file: ${file.file_name}`,
-                                                                );
-                                                            }}
+                                                            className="text-red-600 text-sm hover:underline cursor-pointer"
+                                                            onClick={() =>
+                                                                handleDelete(
+                                                                    file.id,
+                                                                )
+                                                            }
                                                         >
                                                             Delete
                                                         </button>
@@ -77,12 +145,15 @@ const ListDossiers = ({ dossiers }: ListDossiersProps) => {
                                                 type="file"
                                                 id={`upload-${dossier.id}-${category}`}
                                                 className="hidden"
+                                                accept=".pdf,.png,.jpg"
                                                 onChange={(e) => {
-                                                    if (e.target.files) {
-                                                        const file =
-                                                            e.target.files[0];
-                                                        console.log(
-                                                            `Upload file: ${file.name} for category: ${category}`,
+                                                    const file =
+                                                        e.target.files?.[0];
+                                                    if (file) {
+                                                        handleUpload(
+                                                            file,
+                                                            dossier.name,
+                                                            category as Category,
                                                         );
                                                     }
                                                 }}

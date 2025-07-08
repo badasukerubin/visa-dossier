@@ -1,28 +1,27 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import DossierListController from "@/actions/App/Http/Controllers/API/V1/DossierListController";
 import ListDossiers from "@/components/ListDossiers";
 import { DossierGroupedByCategory } from "./types";
+import { NavLink, useLocation } from "react-router";
+import Message from "@/components/Message";
+import useSimpleQuery from "@/hooks/Query/useSimpleQuery";
 
 const Home = () => {
-    const [dossiers, setDossiers] = useState<DossierGroupedByCategory[]>([]);
-    const [loading, setLoading] = useState(true);
+    const location = useLocation();
+    const { message, type } = location.state || { message: null, type: null };
 
-    useEffect(() => {
-        const fetchDossiers = async () => {
-            try {
-                const response = await axios.get(
-                    DossierListController.get().url,
-                );
-                setDossiers(response.data.data.items || []);
-            } catch {
-                setDossiers([]);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchDossiers();
-    }, []);
+    const {
+        data,
+        isPending: loading,
+        isError,
+    } = useSimpleQuery<{
+        data: { items: DossierGroupedByCategory[] };
+    }>({
+        queryKey: ["dossiers"],
+        route: DossierListController.get().url,
+    });
+
+    const dossiers = data?.data?.items || [];
 
     if (loading) {
         return (
@@ -32,15 +31,38 @@ const Home = () => {
         );
     }
 
-    if (!dossiers.length) {
+    if (isError) {
         return (
-            <div className="text-center py-8 text-gray-500">
-                No dossiers found.
+            <div className="text-center py-8 text-red-500">
+                Failed to load dossiers.
             </div>
         );
     }
 
-    return <div className="">{<ListDossiers dossiers={dossiers} />}</div>;
+    if (!dossiers.length) {
+        return (
+            <div className="text-center py-8 text-gray-500">
+                No dossiers found.
+                <br />
+                <span className="text-blue-600">
+                    <NavLink
+                        to="/create-dossier"
+                        className="underline hover:text-blue-700"
+                    >
+                        Create a new dossier
+                    </NavLink>
+                </span>
+            </div>
+        );
+    }
+
+    return (
+        <div className="">
+            <Message message={message} type={type} />
+
+            {<ListDossiers dossiers={dossiers} />}
+        </div>
+    );
 };
 
 export default Home;
