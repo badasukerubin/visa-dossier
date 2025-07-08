@@ -6,11 +6,13 @@ import { store } from "@/actions/Laravel/Fortify/Http/Controllers/AuthenticatedS
 import { show } from "@/actions/Laravel/Sanctum/Http/Controllers/CsrfCookieController";
 import Message from "@/components/Message";
 import { useQueryClient } from "@tanstack/react-query";
+import { useAuth } from "@/Provider/AuthProvider";
 
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const queryClient = useQueryClient();
+    const { setAuthenticated } = useAuth();
 
     const { message, type } = location.state || { message: null, type: null };
 
@@ -29,6 +31,8 @@ const Login = () => {
                 });
 
                 form.reset();
+
+                setAuthenticated(true);
 
                 queryClient.invalidateQueries({
                     queryKey: ["auth-user"],

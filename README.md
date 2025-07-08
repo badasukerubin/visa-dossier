@@ -1,4 +1,4 @@
-## VISA Dossier
+# VISA Dossier
 
 This repository contains a basic VISA Dossier management feature using Laravel(API only) and React Router (previously Remix).
 
@@ -6,16 +6,16 @@ This repository contains a basic VISA Dossier management feature using Laravel(A
 
 #### Prerequisites
 
--   PHP 8.3 or higher
+-   PHP 8.3+
 -   Composer
--   Node.js and npm
--   SQLite
+-   Node.js & npm
+-   SQLite (default, easy setup)
 
 1. Clone the Repository
 
-```bash
-git clone https://github.com/badasukerubin/visa-dossier
-```
+    ```bash
+    git clone https://github.com/badasukerubin/visa-dossier
+    ```
 
 2. Navigate to the repository:
 
@@ -96,4 +96,11 @@ git clone https://github.com/badasukerubin/visa-dossier
 -   [x] Select and upload a file (no drag and drop)
 -   [x] View a list of uploaded files, grouped by 3 categories of your choosing
 -   [x] Delete a file
--   [ ] Show a basic file preview if possible (e.g. image thumbnail or file na
+-   [ ] Show a basic file preview if possible (e.g. image thumbnail or file name
+-   [x] Provide simple feedback for actions (uploading, success, failure)
+
+## Screenshot
+
+![alt text](image.png)
+
+---

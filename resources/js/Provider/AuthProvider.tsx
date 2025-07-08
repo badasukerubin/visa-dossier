@@ -14,19 +14,13 @@ import useSimpleQuery from "@/hooks/Query/useSimpleQuery";
 const AuthContext = createContext<AuthContextType>({
     authenticated: false,
     loading: true,
-    refresh: () => {},
     setAuthenticated: () => {},
 });
 
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [authenticated, setAuthenticated] = useState(false);
 
-    const {
-        data,
-        isPending: loading,
-        isError,
-        refetch: refresh,
-    } = useSimpleQuery({
+    const { data, isPending: loading } = useSimpleQuery({
         queryKey: ["auth-user"],
         route: get().url,
         enabled: true,
@@ -36,11 +30,15 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     useEffect(() => {
         setAuthenticated(!!data);
-    }, [data]);
+    }, [data, loading]);
 
     return (
         <AuthContext.Provider
-            value={{ authenticated, loading, refresh, setAuthenticated }}
+            value={{
+                authenticated,
+                loading,
+                setAuthenticated,
+            }}
         >
             {children}
         </AuthContext.Provider>
